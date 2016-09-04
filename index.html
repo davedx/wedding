@@ -68,6 +68,12 @@
     color: #c82425;
     text-decoration: none;
   }
+  .page iframe {
+    border: 1px solid #ccc !important;
+  }
+  #rsvp {
+    padding-bottom: 200px;
+  }
   .page-title {
     font-family: 'Tangerine', cursive;
     color: #c82425;
@@ -144,13 +150,11 @@
       }
     }
     function toggleDisplay(display) {
-      console.log("display: "+display);
       return display === 'block' ? 'none' : 'block';
     }
     for(var i=0; i<nav_items.length; i++) {
       (function(idx) {
         var el = nav_items[idx];
-        console.log("el: ", el);
         el.onclick = function () {
           hidePages();
           var pageId = el.getAttribute('data-id');
@@ -161,8 +165,8 @@
     };
   };
   </script>
-  <link href='https://fonts.googleapis.com/css?family=Tangerine' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/css?family=Tangerine" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Vollkorn" rel="stylesheet" type="text/css">
 </head>
 <body>
   <div id="background_overlay" class="background-overlay">
@@ -217,7 +221,11 @@
     <div class="page" id="venue">
       <h2 class="page-title">Venue</h2>
 
-      <p>We are getting married at the beautiful <a href="http://www.kasteelwijenburg.nl/">Kasteel Wijenburg</a> in Echteld.</p>
+      <div class="circle-block"><span class="us-circle dave-circle"></span><i>We are getting married at the beautiful <a href="http://www.kasteelwijenburg.nl/">Kasteel Wijenburg</a> in Echteld.</i></div>
+      
+      <p>The exact age of the castle remains unknown, but the oldest records of it date back to 1178. From 1271 to 1817 the castle was inhabited by the Wijhe family, a uniquely long period for a castle to be owned by one and the same family.</p>
+
+      <p>The castle remained inhabited until 1928, after which it was left empty until completely restored between 1956 and 1977. Since 1994 the castle is an official and popular wedding venue, often in combination with the 13 century church across the road.</p>
 
       <h3 class="page-title">Getting to the Netherlands</h3>
 
