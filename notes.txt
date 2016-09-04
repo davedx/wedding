@@ -1,0 +1,6 @@
+Website pages
+* Landing page
+* Registry - moneyz
+* Information (maybe split into programme and staying/practical info?)
+* About bride/groom
+* RSVP form

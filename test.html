@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+<head>
+<title>Human interfaces project</title>
+<style>
+* {
+  font-size: 20px;
+  font-family: "Helvetica Neue";
+}
+h1 {
+  font-size: 30px;
+}
+body {
+  background-color: #DDE;
+}
+.change-password {
+  padding: 30px;
+}
+.password-input {
+  display: inline-block;
+  position: relative;
+  margin: 0 15px;
+}
+.change-password input {
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 2px solid #77F;
+  background-color: #FFF;
+  outline: none;
+}
+.change-password input:focus {
+  border-bottom: 4px solid #44B;
+}
+.change-password input[type=password] {
+  padding: 4px 5px;
+  font-size: 25px;
+  letter-spacing: 4px;
+}
+.change-password input[type=password]::-webkit-input-placeholder {
+  letter-spacing: 0px;
+}
+.password-input-validation {
+  position: absolute;
+  top: 50px;
+  background-color: white;
+  padding: 15px 15px;
+  display: none;
+}
+</style>
+<script>
+function el (id) {
+  return document.getElementById(id);
+}
+function hide (el) {
+  el.style.display = 'none';
+}
+function show (el) {
+  el.style.display = 'block';
+}
+
+function attachValidation(inputEl, validationEl, validator) {
+  inputEl.onkeyup = function () {
+    validator(inputEl, function (err, ok) {
+      if (ok) {
+        validationEl.innerHTML = '';
+        hide(validationEl);
+      } else {
+        validationEl.innerHTML = err;
+        show(validationEl);
+      }
+    });
+  }
+  inputEl.onblur = function () {
+    hide(validationEl);
+  }
+}
+
+window.onload = function () {
+  var oldpw = 'test';
+
+  var password_from = el('password_from');
+  var password_from_validation = el('password_from_validation');
+  var password_to = el('password_to');
+  function password_from_validator(el, callback) {
+    callback('That isn\'t your old password', el.value === oldpw);
+  }
+  function password_to_validator(el, callback) {
+    callback('Choose a stronger password', el.value.match(/[a-z0-9]+/));
+  }
+  attachValidation(password_from, password_from_validation, password_from_validator);
+  attachValidation(password_to, password_to_validation, password_to_validator);
+}
+</script>
+
+</head>
+<body>
+  <div class="container">
+    <h1>Humanized interfaces project</h1>
+    <div class="change-password">
+      Change password from
+      <div class="password-input">
+        <input type="password" placeholder="my old password" id="password_from">
+        <div class="password-input-validation" id="password_from_validation"></div>
+      </div>
+      to
+      <div class="password-input">
+        <input type="password" placeholder="a new password" id="password_to">
+        <div class="password-input-validation" id="password_to_validation"></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
