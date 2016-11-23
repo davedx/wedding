@@ -8,6 +8,7 @@
     background-image: url('kasteel-wijenburg-echteld-slotgracht.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
+    background-color: #131313;
     margin: 0;
     padding: 0;
   }
@@ -18,38 +19,91 @@
     margin: 0;
     z-index: -1;
     overflow: auto;
-    background-color: rgba(255, 255, 255, 0);
-    -webkit-transition: background-color 200ms;
   }
   .header {
-    font-size: 2em;
-    padding: 1.4em 2.7em;
+    padding: 45px 85px;
     font-family: 'Tangerine', cursive;
-  }
-  .header h2 {
-    font-weight: normal;
-    margin: 0;
   }
   .header h1 {
     font-family: 'Alex Brush';
     font-weight: normal;
+    font-size: 60px;
     margin: 0.5em 0;
   }
+  .header h2 {
+    font-weight: normal;
+    font-size: 40px;
+    margin: 0;
+  }
+  @media (min-width: 640px) and (max-width: 1024px) {
+    .header {
+      padding: 45px 60px;
+    }
+    .header h1 {
+      font-size: 50px;
+    }
+    .header h2 {
+      font-size: 30px;
+    }
+  }
+  @media (max-width: 639px) {
+    .header {
+      margin-top: 40px;
+      padding: 15px 10px;
+      text-align: center;
+    }
+    .header h1 {
+      font-size: 35px;
+    }
+    .header h2 {
+      font-size: 25px;
+    }
+  }
+
   .nav {
     font-family: 'Vollkorn', serif;
     position: fixed;
     border: 1px solid #DDD;
     right: 0;
     top: 0;
-    margin: 3em 3em;
-    padding: 2em;
+    margin: 40px 40px;
+    padding: 30px;
     background-color: rgba(255, 255, 255, 0.8);
+  }
+  .mobile-menu {
+    display: none;
+  }
+  @media (max-width: 639px) {
+    .nav {
+      margin-top: 40px;
+      margin-right: 0;
+      display: none;
+      background-color: rgba(255, 255, 255, 0.95);
+      font-size: 20px;
+    }
+    .mobile-menu {
+      display: block;
+      background-color: rgba(255, 255, 255, 0.95);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: 40px;
+    }
+    .menu-open {
+      position: absolute;
+      right: 7px;
+      top: 7px;
+      width: 25px;
+      height: 25px;
+      border-radius: 4px;
+      background-color: #c82425;
+    }
   }
   .page {
     font-family: 'Vollkorn', serif;
-    font-size: 1.3em;
-    margin: 10px 2.3em 4.5em 2.3em;
-    padding: 2em 10.5em 2em 2em;
+    font-size: 20px;
+    margin: 10px 40px 50px 40px;
+    padding: 40px 70px 40px 40px;
     background-color: rgba(255, 255, 255, 0.9);
     display: none;
   }
@@ -57,18 +111,45 @@
     line-height: 1.3em;
   }
   .page h2 {
-    font-size: 2.5em;
+    font-size: 50px;
     font-weight: normal;
   }
   .page h3 {
     margin-top: 0.8em;
-    font-size: 2.2em;
+    font-size: 40px;
     font-weight: normal;
   }
   .page h4 {
     margin-top: 0.8em;
-    font-size: 2em;
+    font-size: 35px;
     font-weight: normal;
+  }
+  @media (min-width: 640px) and (max-width: 1024px) {
+    .page h2 {
+      font-size: 40px;
+    }
+    .page h3 {
+      font-size: 30px;
+    }
+    .page h4 {
+      font-size: 20px;
+    }
+  }
+  @media (max-width: 639px) {
+    .page h2 {
+      font-size: 30px;
+      margin: 0;
+    }
+    .page h3 {
+      font-size: 20px;
+    }
+    .page h4 {
+      font-size: 15px;
+    }
+    .page {
+      margin: 10px 5px 50px 5px;
+      padding: 10px;
+    }
   }
   .page a {
     color: #c82425;
@@ -84,6 +165,9 @@
     font-family: 'Tangerine', cursive;
     color: #c82425;
     margin: 0.2em 0.2em 0.5em 0;
+  }
+  #programme {
+    display: block;
   }
   .nav-items, .programme-items {
     list-style-type: none;
@@ -147,6 +231,8 @@
     var menu_programme = elem('menu_programme');
     var page_programme = elem('programme');
     var background_overlay = elem('background_overlay');
+    var menu_open = elem('menu_open');
+    var nav = elem('nav');
     var pages = document.getElementsByClassName('page');
     var nav_items = document.getElementsByClassName('nav-item');
     function hidePages() {
@@ -158,31 +244,42 @@
     function toggleDisplay(display) {
       return display === 'block' ? 'none' : 'block';
     }
+    menu_open.onclick = function () {
+      nav.style.display = toggleDisplay(nav.style.display);
+    };
+
     for(var i=0; i<nav_items.length; i++) {
       (function(idx) {
         var el = nav_items[idx];
         el.onclick = function () {
-          hidePages();
           var pageId = el.getAttribute('data-id');
           var targetEl = elem(pageId);
-          targetEl.style.display = toggleDisplay(targetEl.style.display);
+          var targetToggle = toggleDisplay(targetEl.style.display);
+          hidePages();
+          if (window.innerWidth <= 320) {
+            nav.style.display = 'none';
+          }
+          targetEl.style.display = targetToggle;
         };
       })(i);
     };
   };
   </script>
-  <link href="https://fonts.googleapis.com/css?family=Alex+Brush" rel="stylesheet">
+<!--   <link href="https://fonts.googleapis.com/css?family=Alex+Brush" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Tangerine" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Vollkorn" rel="stylesheet" type="text/css">
-</head>
+ --></head>
 <body>
   <div id="background_overlay" class="background-overlay">
+    <div class="mobile-menu">
+      <div class="menu-open" id="menu_open"></div>
+    </div>
     <header class="header">
       <h2>Dave en Lara gaan trouwen</h2>
       <h1>15 April 2017</h1>
       <h2>Kasteel Wijenburg</h2>
     </header>
-    <nav class="nav">
+    <nav class="nav" id="nav">
       <ul class="nav-items">
         <li class="nav-item" data-id="programme">Programme</li>
         <li class="nav-item" data-id="about_us">About us</li>
@@ -259,8 +356,8 @@
 
       <p>There is plenty of parking space available.</p>
 
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2461.345718843699!2d5.496865951017797!3d51.90940328895211!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c65615d9392785%3A0xcde2f51871b70bfd!2sKasteel+Wijenburg!5e0!3m2!1sen!2snl!4v1460317065010" width="800" height="600" frameborder="0" style="border:0" allowfullscreen></iframe>
-    </div>
+<!--       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2461.345718843699!2d5.496865951017797!3d51.90940328895211!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c65615d9392785%3A0xcde2f51871b70bfd!2sKasteel+Wijenburg!5e0!3m2!1sen!2snl!4v1460317065010" width="800" height="600" frameborder="0" style="border:0" allowfullscreen></iframe>
+ -->    </div>
     <div class="page" id="rsvp">
       <h2 class="page-title">RSVP</h2>
       <div class="circle-block"><span class="us-circle lara-circle"></span><i>We'd love to know who to expect, so we can make sure there's enough food and drinks!</i></div>
