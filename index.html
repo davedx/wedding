@@ -75,6 +75,17 @@
   .mobile-menu {
     display: none;
   }
+  .lang-desktop {
+    display: none;
+  }
+  @media (min-width: 640px) {
+    .lang-desktop {
+      display: block;
+      position: absolute;
+      top: 1px;
+      right: 35px;
+    }
+  }
   @media (max-width: 639px) {
     .nav {
       margin-top: 40px;
@@ -140,14 +151,14 @@
   }
   @media (max-width: 639px) {
     .page h2 {
-      font-size: 40px;
+      font-size: 45px;
       margin: 0;
     }
     .page h3 {
-      font-size: 35px;
+      font-size: 40px;
     }
     .page h4 {
-      font-size: 15px;
+      font-size: 35px;
     }
     .page {
       margin: 10px 5px 50px 5px;
@@ -230,6 +241,10 @@
     font-family: 'Courier New';
     font-style: normal;
   }
+  .bank {
+    display: block;
+    padding: 6px 20px;
+  }
   .lara-circle {
     background-image: url('lara-2.png');
   }
@@ -248,6 +263,9 @@
   label {
     margin-right: 8px;
   }
+  #menu_options {
+    display: none;
+  }
   #submit_rsvp {
     font-size: 22px;
     border: 1px solid grey;
@@ -259,6 +277,12 @@
   }
   #submit_rsvp:hover {
     background: #ccc;
+  }
+  .lang {
+    display: inline-block;
+    z-index: 10;
+    margin: 7px 10px;
+    cursor: pointer;
   }
   </style>
   <script>
@@ -277,10 +301,19 @@
     var status_no = elem('status_no');
     var status_yes = elem('status_yes');
     var name_1 = elem('name_1');
+    var starter_1 = elem('starter_1');
+    var main_1 = elem('main_1');
+    var starter_2 = elem('starter_2');
+    var main_2 = elem('main_2');
     var form_error = elem('form_error');
     var background_overlay = elem('background_overlay');
     var menu_open = elem('menu_open');
     var nav = elem('nav');
+    var m_nl = elem('m_nl');
+    var m_en = elem('m_en');
+    var d_nl = elem('d_nl');
+    var d_en = elem('d_en');
+    var menu_options = elem('menu_options');
     var pages = document.getElementsByClassName('page');
     var nav_items = document.getElementsByClassName('nav-item');
     function hidePages() {
@@ -294,6 +327,89 @@
     }
     menu_open.onclick = function () {
       nav.style.display = toggleDisplay(nav.style.display);
+    };
+
+    var strings = {
+      "en": {
+        "title_1": "Dave and Lara are getting married",
+        "title_2": "15 April 2017",
+        "title_3": "Kasteel Wijenburg",
+        "menu_programme": "Programme",
+        "menu_aboutus": "About us",
+        "menu_registry": "Registry",
+        "menu_venue": "Venue",
+        "menu_rsvp": "RSVP",
+        "title_programme": "Programme",
+        "intro_programme": "We can't wait to welcome you to our wedding! Here's what our day will look like.",
+        "programme_1": "12:15 Guests arrive, welcomed with tea/coffee",
+        "programme_2": "13:00 Ceremony",
+        "programme_3": "13:30 Bubbles and cake",
+        "programme_4": "14:30 Photos, drinks &amp; canapés",
+        "programme_5": "16:30 Wine/Beer tasting",
+        "programme_6": "17:30 Evening meal &amp; speeches",
+        "programme_7": "19:00 Kids' disco",
+        "programme_8": "20:30 Party",
+        "programme_9": "00:00 End of party except for die-hards",
+        "registry_1": "Please send us Bitcoins to: <span class=\"btc\">1CZCbBTYvo2sb52h9dYQdfEKMg8MDiEpJ9</span>",
+        "registry_2": "Behave.",
+        "registry_3": "Of course love!<br />We have everything we need, and we're just happy to have you there at our wedding. If you would like to give us a wedding present, we are planning a honeymoon with the kids to Eurodisney. We'd be happy with a contribution to bring the magic alive!",
+        "title_venue": "Venue",
+        "venue_1": "We are getting married at the beautiful <a href=\"http://www.kasteelwijenburg.nl/\">Kasteel Wijenburg</a> in Echteld.",
+        "venue_2": "The exact age of the castle remains unknown, but the oldest records of it date back to 1178. From 1271 to 1817 the castle was inhabited by the Van Wijhe family, a uniquely long period for a castle to be owned by one and the same family.",
+        "venue_3": "The castle remained inhabited until 1928, after which it was left empty until completely restored between 1956 and 1977. Since 1994 the castle is an official and popular wedding venue, often in combination with the 13 century church across the road.",
+        "title_rsvp": "RSVP",
+
+      },
+      "nl": {
+        "title_1": "Dave en Lara gaan trouwen",
+        "title_2": "15 April 2017",
+        "title_3": "Kasteel Wijenburg",
+        "menu_programme": "Programme",
+        "menu_aboutus": "Over ons",
+        "menu_registry": "Verlanglijstje",
+        "menu_venue": "Locatie",
+        "menu_rsvp": "RSVP",
+        "title_programme": "Programma",
+        "intro_programme": "We kunnen niet wachten jullie op ons huwelijk welkom te heten! Onze dag ziet er als volgt uit.",
+        "programme_1": "12:15 Aankomst gasten, ontvangst met koffie/thee",
+        "programme_2": "13:00 Huwelijksvoltrekking",
+        "programme_3": "13:30 Taart en bubbels",
+        "programme_4": "14:30 Foto's, hapjes &amp; drankjes",
+        "programme_5": "16:30 Wijn-/bier proeverij",
+        "programme_6": "17:30 Diner &amp; speeches",
+        "programme_7": "19:00 Kinderdisco",
+        "programme_8": "20:30 Feest",
+        "programme_9": "00:00 Einde feest behalve voor die-hards",
+        "registry_1": "Stuur ons alsjeblieft Bitcoins op: <span class=\"btc\">1CZCbBTYvo2sb52h9dYQdfEKMg8MDiEpJ9</span>",
+        "registry_2": "Gedraag je.",
+        "registry_3": "Natuurlijk liefste!<br />We hebben alles dat we nodig hebben, en zijn gewoon blij dat je er bij bent op onze bruiloft. Mocht je toch een kado willen geven, wij zijn van plan met de kinderen op huwelijksreis te gaan naar Eurodisney. Een bijdrage om de magie tot leven te brengen zouden wij zeer waarderen!",
+        "title_venue": "Locatie",
+        "venue_1": "Wij trouwen op het prachtige <a href=\"http://www.kasteelwijenburg.nl/\">Kasteel Wijenburg</a> in Echteld.",
+        "venue_2": "De leeftijd van het kasteel is niet precies bekend, maar de oudste datering gaat terug tot 1178. Van 1271 tot 1817 werd het kasteel bewoond door de familie Van Wijhe en haar nazaten. Het is een uniek gegeven, dat het kasteel zolang door één en dezelfde familie is bewoond.",
+        "venue_3": "Het kasteel bleef bewoond tot 1928, daarna stond het leeg totdat het volkomen werd gerestaureerd tussen 1956 en 1977. Sinds 1994 is het kasteel een officiële en populaire trouwlocatie, vaak in combinatie met het 13e eeuwse kerkje aan de overzijde.",
+        "title_rsvp": "RSVP",
+      }  
+    };
+
+    function setStrings(lang) {
+      var str = strings[lang];
+      for(var k in str) {
+        var val = str[k];
+        elem(k).innerHTML = val;
+      }
+    }
+
+    m_nl.onclick = function () {
+      setStrings('nl');
+    };
+    d_nl.onclick = function () {
+      setStrings('nl');
+    };
+    m_en.onclick = function () {
+      setStrings('en');
+    };
+    d_en.onclick = function () {
+      setStrings('en');
     };
 
     function setFormError(text) {
@@ -310,6 +426,22 @@
         e.preventDefault();
         return setFormError('Please select whether you will be coming or not.');
       }
+      if (status_yes.checked) {
+        // validate meals
+        if (starter_1.value === 'none' ||
+          main_1.value === 'none') {
+          e.preventDefault();
+          return setFormError('Please select meal choices for Guest 1.');
+        }
+      }
+    };
+
+    status_yes.onclick = function () {
+      menu_options.style.display = 'block';
+    };
+
+    status_no.onclick = function () {
+      menu_options.style.display = 'none';
     };
 
     for(var i=0; i<nav_items.length; i++) {
@@ -336,45 +468,51 @@
 <body>
   <div id="background_overlay" class="background-overlay">
     <div class="mobile-menu">
+      <div class="lang" id="m_nl">🇳🇱</div>
+      <div class="lang" id="m_en">🇬🇧</div>
       <div class="menu-open" id="menu_open"></div>
     </div>
+    <div class="lang-desktop">
+      <div class="lang" id="d_nl">🇳🇱</div>
+      <div class="lang" id="d_en">🇬🇧</div>
+    </div>
     <header class="header">
-      <h2>Dave en Lara gaan trouwen</h2>
-      <h1>15 April 2017</h1>
-      <h2>Kasteel Wijenburg</h2>
+      <h2 id="title1">Dave and Lara are getting married</h2>
+      <h1 id="title2">15 April 2017</h1>
+      <h2 id="title3">Kasteel Wijenburg</h2>
     </header>
     <nav class="nav" id="nav">
       <ul class="nav-items">
-        <li class="nav-item" data-id="programme">Programme</li>
-        <li class="nav-item" data-id="about_us">About us</li>
-        <li class="nav-item" data-id="registry">Registry</li>
-        <li class="nav-item" data-id="venue">Venue</li>
-        <li class="nav-item" data-id="rsvp">RSVP</li>
+        <li class="nav-item" data-id="programme" id="menu_programme">Programme</li>
+        <li class="nav-item" data-id="about_us" id="menu_aboutus">About us</li>
+        <li class="nav-item" data-id="registry" id="menu_registry">Registry</li>
+        <li class="nav-item" data-id="venue" id="menu_venue">Venue</li>
+        <li class="nav-item" data-id="rsvp" id="menu_rsvp">RSVP</li>
       </ul>
     </nav>
     <div class="page" id="programme">
-      <h2 class="page-title">Programme</h2>
+      <h2 class="page-title" id="title_programme">Programme</h2>
 
-      <div class="circle-block"><span class="us-circle lara-circle"></span><i>We can't wait to welcome you to our wedding! Here's what our day will look like.</i></div>
+      <div class="circle-block"><span class="us-circle lara-circle"></span><i id="intro_programme">We can't wait to welcome you to our wedding! Here's what our day will look like.</i></div>
 
       <ul class="programme-items">
-        <li>12:15 Guests arrive, welcomed with tea/coffee</li>
+        <li id="programme_1">12:15 Guests arrive, welcomed with tea/coffee</li>
 
-        <li>13:00 Ceremony</li>
+        <li id="programme_2">13:00 Ceremony</li>
 
-        <li>13:30 Bubbles and cake</li>
+        <li id="programme_3">13:30 Bubbles and cake</li>
         
-        <li>14:30 Photos, drinks &amp; canapés</li>
+        <li id="programme_4">14:30 Photos, drinks &amp; canapés</li>
         
-        <li>16:30 Wine tasting</li>
+        <li id="programme_5">16:30 Wine tasting</li>
 
-        <li>17:30 Evening meal &amp; speeches</li>
+        <li id="programme_6">17:30 Evening meal &amp; speeches</li>
         
-        <li>19:00 Kids' disco</li>
+        <li id="programme_7">19:00 Kids' disco</li>
         
-        <li>20:30 Party</li>
+        <li id="programme_8">20:30 Party</li>
         
-        <li>00:00 End of party except for die-hards</li>
+        <li id="programme_9">00:00 End of party except for die-hards</li>
       </ul>
     </div>
     <div class="page" id="registry">
@@ -385,6 +523,13 @@
       
       <div class="circle-block"><span class="us-circle dave-circle"></span><i>Of course love!<br />
         We have everything we need, and we're just happy to have you there at our wedding. If you would like to give us a wedding present, we are planning a honeymoon with the kids to Eurodisney. We'd be happy with a contribution to bring the magic alive!</i></div>
+      <br><br>
+      <div>
+        <span class="bank">IBAN: NL40 INGB 0686 7887 88</span>
+      </div>
+      <div>
+        <span class="bank">Account name: D W Clayton en L V de Groot</span>
+      </div>
     </div>
     <div class="page" id="venue">
       <h2 class="page-title">Venue</h2>
@@ -399,11 +544,11 @@
 
       <h4 class="page-title">By boat</h4>
 
-      <p>You can sail from Newcastle to IJmuiden (near Amsterdam), Hull to Rotterdam, or if you'd like to detour through France and Belgium there's always the Dover-Calais ferry.</p>
+      <p>You can sail from <a href="https://www.dfdsseaways.com/">Newcastle to IJmuiden</a> (near Amsterdam), <a href="http://www.poferries.com/en/hull-rotterdam">Hull to Rotterdam</a>, or if you'd like to detour through France and Belgium there's always the Dover-Calais ferry.</p>
 
       <h4 class="page-title">Flying</h4>
 
-      <p>There are quite a few flights to the Netherlands. EasyJet flies to Amsterdam from many locations across the UK, RyanAir flies to Eindhoven and to Weeze (in Germany, but very close to the border and the venue).
+      <p>There are quite a few flights to the Netherlands. <a href="https://www.easyjet.com">EasyJet</a> flies to Amsterdam from many locations across the UK, <a href="https://www.ryanair.com">Ryanair</a> flies to Eindhoven and to Weeze (in Germany, but very close to the border and the venue).
 
       <h3 class="page-title">Getting to the venue</h3>
 
@@ -432,43 +577,50 @@
         <input name="name_1" id="name_1"><br><br><br>
 
         <input type="radio" name="status" id="status_no" value="no"> Sorry, we cannot come<br><br>
-        <input type="radio" name="status" id="status_yes" value="yes"> We will be coming. See you there!<br>
+        <input type="radio" name="status" id="status_yes" value="yes"> We will be coming<br>
 
-        <h3 class="page-title">Guest 1</h3>
-        <label for="starter_1">Starter</label>
-        <select id="starter_1" name="starter_1">
-          <option value="meat">Meat</option>
-          <option value="fish">Fish</option>
-          <option value="vege">Vegetarian</option>
-        </select><br><br>
+        <div id="menu_options">
+          <h3 class="page-title">Guest 1</h3>
+          <label for="starter_1">Starter</label>
+          <select id="starter_1" name="starter_1">
+            <option value="none"></option>
+            <option value="meat">Meat</option>
+            <option value="fish">Fish</option>
+            <option value="vege">Vegetarian</option>
+          </select><br><br>
 
-        <label for="main_1">Main course</label>
-        <select id="main_1" name="main_1">
-          <option value="meat">Meat</option>
-          <option value="fish">Fish</option>
-          <option value="vege">Vegetarian</option>
-        </select><br><br>
+          <label for="main_1">Main course</label>
+          <select id="main_1" name="main_1">
+            <option value="none"></option>
+            <option value="meat">Meat</option>
+            <option value="fish">Fish</option>
+            <option value="vege">Vegetarian</option>
+          </select><br><br>
 
-        <h3 class="page-title">Guest 2</h3>
-        <label for="starter_2">Starter</label>
-        <select id="starter_2" name="starter_2">
-          <option value="meat">Meat</option>
-          <option value="fish">Fish</option>
-          <option value="vege">Vegetarian</option>
-        </select><br><br>
+          <h3 class="page-title">Guest 2</h3>
+          <label for="starter_2">Starter</label>
+          <select id="starter_2" name="starter_2">
+            <option value="none"></option>
+            <option value="meat">Meat</option>
+            <option value="fish">Fish</option>
+            <option value="vege">Vegetarian</option>
+          </select><br><br>
 
-        <label for="main_2">Main course</label>
-        <select id="main_2" name="main_2">
-          <option value="meat">Meat</option>
-          <option value="fish">Fish</option>
-          <option value="vege">Vegetarian</option>
-        </select><br><br>
+          <label for="main_2">Main course</label>
+          <select id="main_2" name="main_2">
+            <option value="none"></option>
+            <option value="meat">Meat</option>
+            <option value="fish">Fish</option>
+            <option value="vege">Vegetarian</option>
+          </select>
+        </div>
+        <br><br>
         <div id="form_error"></div>
         <input type="submit" id="submit_rsvp" value="Send RSVP">
       </form>
     </div>
     <div class="page" id="about_us">
-      <h2 class="page-title">The Tale of the Mage and Paladin</h2>
+      <h2 class="page-title" id="title_aboutus">The Tale of the Mage and Paladin</h2>
       
       <h3 class="page-title">Once upon a time, in Azeroth</h3>
 
