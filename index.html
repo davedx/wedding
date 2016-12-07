@@ -395,7 +395,12 @@
       var str = strings[lang];
       for(var k in str) {
         var val = str[k];
-        elem(k).innerHTML = val;
+        var el = elem(k);
+        if (el) {
+          elem(k).innerHTML = val;
+        } else {
+          console.warn('Cannot find element for string key: '+k);
+        }
       }
     }
 
@@ -477,9 +482,9 @@
       <div class="lang" id="d_en">🇬🇧</div>
     </div>
     <header class="header">
-      <h2 id="title1">Dave and Lara are getting married</h2>
-      <h1 id="title2">15 April 2017</h1>
-      <h2 id="title3">Kasteel Wijenburg</h2>
+      <h2 id="title_1">Dave and Lara are getting married</h2>
+      <h1 id="title_2">15 April 2017</h1>
+      <h2 id="title_3">Kasteel Wijenburg</h2>
     </header>
     <nav class="nav" id="nav">
       <ul class="nav-items">
@@ -532,7 +537,7 @@
       </div>
     </div>
     <div class="page" id="venue">
-      <h2 class="page-title">Venue</h2>
+      <h2 class="page-title" id="title_venue">Venue</h2>
 
       <div class="circle-block"><span class="us-circle dave-circle"></span><i id="venue_1">We are getting married at the beautiful <a href="http://www.kasteelwijenburg.nl/">Kasteel Wijenburg</a> in Echteld.</i></div>
       
