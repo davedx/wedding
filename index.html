@@ -295,6 +295,26 @@
       alert('Thank you for sending your RSVP!');
     }
 
+    var strings = {};
+
+    function loadStrings() {
+      var x;
+      if (window.XMLHttpRequest) {
+        x = new XMLHttpRequest();
+      } else {
+        x = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+      x.open("GET", "/strings.json", true);
+      x.onreadystatechange = function() {
+        if(x.readyState == 4 && x.status == 200) {
+          strings = JSON.parse(x.response);
+        }
+      }
+      x.send();      
+    }
+
+    loadStrings();
+
     var menu_programme = elem('menu_programme');
     var page_programme = elem('programme');
     var submit_rsvp = elem('submit_rsvp');
@@ -327,91 +347,7 @@
     }
     menu_open.onclick = function () {
       nav.style.display = toggleDisplay(nav.style.display);
-    };
-
-    var strings = {
-      "en": {
-        "title_1": "Dave and Lara are getting married",
-        "title_2": "15 April 2017",
-        "title_3": "Kasteel Wijenburg",
-        "menu_programme": "Programme",
-        "menu_aboutus": "About us",
-        "menu_registry": "Registry",
-        "menu_venue": "Venue",
-        "menu_rsvp": "RSVP",
-        "title_programme": "Programme",
-        "intro_programme": "We can't wait to welcome you to our wedding! Here's what our day will look like.",
-        "programme_1": "12:15 Guests arrive, welcomed with tea/coffee",
-        "programme_2": "13:00 Ceremony",
-        "programme_3": "13:30 Bubbles and cake",
-        "programme_4": "14:30 Photos, drinks &amp; canapés",
-        "programme_5": "16:30 Wine/Beer tasting",
-        "programme_6": "17:30 Evening meal &amp; speeches",
-        "programme_7": "19:00 Kids' disco",
-        "programme_8": "20:30 Party",
-        "programme_9": "00:00 End of party except for die-hards",
-        "registry_1": "Please send us Bitcoins to: <span class=\"btc\">1CZCbBTYvo2sb52h9dYQdfEKMg8MDiEpJ9</span>",
-        "registry_2": "Behave.",
-        "registry_3": "Of course love!<br />We have everything we need, and we're just happy to have you there at our wedding. If you would like to give us a wedding present, we are planning a honeymoon with the kids to Eurodisney. We'd be happy with a contribution to bring the magic alive!",
-        "title_venue": "Venue",
-        "venue_1": "We are getting married at the beautiful <a href=\"http://www.kasteelwijenburg.nl/\">Kasteel Wijenburg</a> in Echteld.",
-        "venue_2": "The exact age of the castle remains unknown, but the oldest records of it date back to 1178. From 1271 to 1817 the castle was inhabited by the Van Wijhe family, a uniquely long period for a castle to be owned by one and the same family.",
-        "venue_3": "The castle remained inhabited until 1928, after which it was left empty until completely restored between 1956 and 1977. Since 1994 the castle is an official and popular wedding venue, often in combination with the 13 century church across the road.",
-        "title_getnl": "Getting to the Netherlands",
-        "title_boat": "By boat",
-        "boat_1": "You can sail from Newcastle to IJmuiden (near Amsterdam), Hull to Rotterdam, or if you'd like to detour through France and Belgium there's always the Dover-Calais ferry.",
-        "title_fly": "Flying",
-        "fly_1": "There are quite a few flights to the Netherlands. EasyJet flies to Amsterdam from many locations across the UK, RyanAir flies to Eindhoven and to Weeze (in Germany, but very close to the border and the venue).",
-        "title_gettingvenue": "Getting to the venue",
-        "title_publictransport": "Public transport",
-        "publictransport_1": "It takes between 1:45 and 2hrs to reach the venue by train and bus from Amsterdam Centraal. You can check routes using the excellent transport website <a href=\"http://9292.nl\">9292.nl</a>",
-        "title_car": "By car",
-        "car_1": "The address is:<br />Kasteel Wijenburg<br />Voorstraat 2<br />4054 MX Echteld",
-        "car_2": "There is plenty of parking space available.",
-        "title_rsvp": "RSVP",
-
-      },
-      "nl": {
-        "title_1": "Dave en Lara gaan trouwen",
-        "title_2": "15 April 2017",
-        "title_3": "Kasteel Wijenburg",
-        "menu_programme": "Programme",
-        "menu_aboutus": "Over ons",
-        "menu_registry": "Verlanglijstje",
-        "menu_venue": "Locatie",
-        "menu_rsvp": "RSVP",
-        "title_programme": "Programma",
-        "intro_programme": "We kunnen niet wachten jullie op ons huwelijk welkom te heten! Onze dag ziet er als volgt uit.",
-        "programme_1": "12:15 Aankomst gasten, ontvangst met koffie/thee",
-        "programme_2": "13:00 Huwelijksvoltrekking",
-        "programme_3": "13:30 Taart en bubbels",
-        "programme_4": "14:30 Foto's, hapjes &amp; drankjes",
-        "programme_5": "16:30 Wijn-/bier proeverij",
-        "programme_6": "17:30 Diner &amp; speeches",
-        "programme_7": "19:00 Kinderdisco",
-        "programme_8": "20:30 Feest",
-        "programme_9": "00:00 Einde feest behalve voor die-hards",
-        "registry_1": "Stuur ons alsjeblieft Bitcoins op: <span class=\"btc\">1CZCbBTYvo2sb52h9dYQdfEKMg8MDiEpJ9</span>",
-        "registry_2": "Gedraag je.",
-        "registry_3": "Natuurlijk liefste!<br />We hebben alles dat we nodig hebben, en zijn gewoon blij dat je er bij bent op onze bruiloft. Mocht je toch een kado willen geven, wij zijn van plan met de kinderen op huwelijksreis te gaan naar Eurodisney. Een bijdrage om de magie tot leven te brengen zouden wij zeer waarderen!",
-        "title_venue": "Locatie",
-        "venue_1": "Wij trouwen op het prachtige <a href=\"http://www.kasteelwijenburg.nl/\">Kasteel Wijenburg</a> in Echteld.",
-        "venue_2": "De leeftijd van het kasteel is niet precies bekend, maar de oudste datering gaat terug tot 1178. Van 1271 tot 1817 werd het kasteel bewoond door de familie Van Wijhe en haar nazaten. Het is een uniek gegeven, dat het kasteel zolang door één en dezelfde familie is bewoond.",
-        "venue_3": "Het kasteel bleef bewoond tot 1928, daarna stond het leeg totdat het volkomen werd gerestaureerd tussen 1956 en 1977. Sinds 1994 is het kasteel een officiële en populaire trouwlocatie, vaak in combinatie met het 13e eeuwse kerkje aan de overzijde.",
-        "title_getnl": "Reizen naar Nederland",
-        "title_boat": "Per boot",
-        "boat_1": "Er gaan dagelijks veerboten van Newcastle naar IJmuiden (dichtbij Amsterdam), van Hull naar Rotterdam, of indien je de voorkeur geeft aan een kleine omweg via Frankrijk en België kun je altijd de Dover-Calais veerboot nemen.",
-        "title_fly": "Per vliegtuig",
-        "fly_1": "Er gaan een flinke hoeveelheid vluchten naar Nederland. EasyJet vliegt op Amsterdam vanuit vele locaties in het Verenigd Koninkrijk, RyanAir vliegt op Eindhoven en op Weeze (in Duitsland, maar dichtbij de grens en trouwlocatie).",
-        "title_gettingvenue": "Reizen naar de locatie",
-        "title_publictransport": "Per openbaar vervoer",
-        "publictransport_1": "Het neemt ongeveer 1:45 tot 2 uur in beslag om per trein en bus van Amsterdam Centraal naar de locatie te reizen. De beste route vind je via de website <a href=\"http://9292.nl\">9292.nl</a>",
-        "title_car": "Per auto",
-        "car_1": "Het adres is:<br />Kasteel Wijenburg<br />Voorstraat 2<br />4054 MX Echteld",
-        "car_2": "Er is ruim voldoende parkeergelegenheid beschikbaar.",
-        "title_rsvp": "RSVP",
-      }  
-    };
+    };    
 
     function setStrings(lang) {
       var str = strings[lang];
@@ -567,30 +503,30 @@
 
       <p id="venue_3">The castle remained inhabited until 1928, after which it was left empty until completely restored between 1956 and 1977. Since 1994 the castle is an official and popular wedding venue, often in combination with the 13 century church across the road.</p>
 
-      <h3 class="page-title">Getting to the Netherlands</h3>
+      <h3 class="page-title" id="title_getnl">Getting to the Netherlands</h3>
 
-      <h4 class="page-title">By boat</h4>
+      <h4 class="page-title" id="title_boat">By boat</h4>
 
-      <p>You can sail from <a href="https://www.dfdsseaways.com/">Newcastle to IJmuiden</a> (near Amsterdam), <a href="http://www.poferries.com/en/hull-rotterdam">Hull to Rotterdam</a>, or if you'd like to detour through France and Belgium there's always the Dover-Calais ferry.</p>
+      <p id="boat_1">You can sail from <a href="https://www.dfdsseaways.com/">Newcastle to IJmuiden</a> (near Amsterdam), <a href="http://www.poferries.com/en/hull-rotterdam">Hull to Rotterdam</a>, or if you'd like to detour through France and Belgium there's always the Dover-Calais ferry.</p>
 
-      <h4 class="page-title">Flying</h4>
+      <h4 class="page-title" id="title_fly">Flying</h4>
 
-      <p>There are quite a few flights to the Netherlands. <a href="https://www.easyjet.com">EasyJet</a> flies to Amsterdam from many locations across the UK, <a href="https://www.ryanair.com">Ryanair</a> flies to Eindhoven and to Weeze (in Germany, but very close to the border and the venue).
+      <p id="fly_1">There are quite a few flights to the Netherlands. <a href="https://www.easyjet.com">EasyJet</a> flies to Amsterdam from many locations across the UK, <a href="https://www.ryanair.com">Ryanair</a> flies to Eindhoven and to Weeze (in Germany, but very close to the border and the venue).
 
-      <h3 class="page-title">Getting to the venue</h3>
+      <h3 class="page-title" id="title_gettingvenue">Getting to the venue</h3>
 
-      <h4 class="page-title">Public transport</h4>
+      <h4 class="page-title" id="title_publictransport">Public transport</h4>
       
-      <p>It takes between 1:45 and 2hrs to reach the venue by train and bus from Amsterdam Centraal. You can check routes using the excellent transport website <a href="http://9292.nl">9292.nl</a>
+      <p id="publictransport_1">It takes between 1:45 and 2hrs to reach the venue by train and bus from Amsterdam Centraal. You can check routes using the excellent transport website <a href="http://9292.nl">9292.nl</a>
 
-      <h4 class="page-title">By car</h4>
+      <h4 class="page-title" id="title_car">By car</h4>
 
-      <p>The address is:<br />
+      <p id="car_1">The address is:<br />
         Kasteel Wijenburg<br />
         Voorstraat 2<br />
         4054 MX Echteld</p>
 
-      <p>There is plenty of parking space available.</p>
+      <p id="car_2">There is plenty of parking space available.</p>
 
       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2461.345718843699!2d5.496865951017797!3d51.90940328895211!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c65615d9392785%3A0xcde2f51871b70bfd!2sKasteel+Wijenburg!5e0!3m2!1sen!2snl!4v1460317065010" frameborder="0" style="border:0" allowfullscreen></iframe>
     </div>
