@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>Dave en Lara gaan trouwen</title>
   <style>
   body {
@@ -32,7 +33,7 @@
   }
   .header h2 {
     font-weight: normal;
-    font-size: 40px;
+    font-size: 60px;
     margin: 0;
   }
   @media (min-width: 640px) and (max-width: 1024px) {
@@ -43,7 +44,7 @@
       font-size: 50px;
     }
     .header h2 {
-      font-size: 30px;
+      font-size: 50px;
     }
   }
   @media (max-width: 639px) {
@@ -53,16 +54,17 @@
       text-align: center;
     }
     .header h1 {
-      font-size: 35px;
+      font-size: 40px;
     }
     .header h2 {
-      font-size: 25px;
+      font-size: 40px;
     }
   }
 
   .nav {
     font-family: 'Vollkorn', serif;
     position: fixed;
+    z-index: 1;
     border: 1px solid #DDD;
     right: 0;
     top: 0;
@@ -92,11 +94,12 @@
     .menu-open {
       position: absolute;
       right: 7px;
-      top: 7px;
-      width: 25px;
-      height: 25px;
-      border-radius: 4px;
-      background-color: #c82425;
+      top: 4px;
+      width: 35px;
+      height: 31px;
+      background-image: url('rose.png');
+      background-size: cover;
+      cursor: pointer;
     }
   }
   .page {
@@ -111,37 +114,37 @@
     line-height: 1.3em;
   }
   .page h2 {
-    font-size: 50px;
+    font-size: 60px;
     font-weight: normal;
   }
   .page h3 {
     margin-top: 0.8em;
-    font-size: 40px;
+    font-size: 50px;
     font-weight: normal;
   }
   .page h4 {
     margin-top: 0.8em;
-    font-size: 35px;
+    font-size: 40px;
     font-weight: normal;
   }
   @media (min-width: 640px) and (max-width: 1024px) {
     .page h2 {
-      font-size: 40px;
+      font-size: 50px;
     }
     .page h3 {
-      font-size: 30px;
+      font-size: 45px;
     }
     .page h4 {
-      font-size: 20px;
+      font-size: 40px;
     }
   }
   @media (max-width: 639px) {
     .page h2 {
-      font-size: 30px;
+      font-size: 40px;
       margin: 0;
     }
     .page h3 {
-      font-size: 20px;
+      font-size: 35px;
     }
     .page h4 {
       font-size: 15px;
@@ -157,9 +160,27 @@
   }
   .page iframe {
     border: 1px solid #ccc !important;
+    width: 100%;
+    height: 500px;
   }
   #rsvp {
     padding-bottom: 200px;
+  }
+  #form_error {
+    display: none;
+    margin: 12px 0;
+    padding: 16px;
+    background: #eee;
+    border: 1px solid #ccc;
+    color: #600;
+  }
+  #form_error .symbol {
+    font-size: 33px;
+    line-height: 33px
+  }
+  #form_error .message {
+    line-height: 33px;
+    vertical-align: top;
   }
   .page-title {
     font-family: 'Tangerine', cursive;
@@ -221,6 +242,24 @@
     margin: 10px auto;
     background-image: url('engagement.png');
   }
+  input, select {
+    font-size: 20px;
+  }
+  label {
+    margin-right: 8px;
+  }
+  #submit_rsvp {
+    font-size: 22px;
+    border: 1px solid grey;
+    cursor: pointer;
+    background: #eee;
+    padding: 8px;
+    margin-top: 20px;
+    width: 150px;
+  }
+  #submit_rsvp:hover {
+    background: #ccc;
+  }
   </style>
   <script>
   function elem(id) {
@@ -228,8 +267,17 @@
   }
 
   window.onload = function () {
+    if (window.location.href.indexOf('#rsvp_thanks') !== -1) {
+      alert('Thank you for sending your RSVP!');
+    }
+
     var menu_programme = elem('menu_programme');
     var page_programme = elem('programme');
+    var submit_rsvp = elem('submit_rsvp');
+    var status_no = elem('status_no');
+    var status_yes = elem('status_yes');
+    var name_1 = elem('name_1');
+    var form_error = elem('form_error');
     var background_overlay = elem('background_overlay');
     var menu_open = elem('menu_open');
     var nav = elem('nav');
@@ -248,6 +296,22 @@
       nav.style.display = toggleDisplay(nav.style.display);
     };
 
+    function setFormError(text) {
+      form_error.style.display = 'block';
+      form_error.innerHTML = '<span class="symbol">&#9888;</span> <span class="message">' + text + '</span>';
+    }
+
+    submit_rsvp.onclick = function (e) {
+      if (name_1.value.length <= 0) {
+        e.preventDefault();
+        return setFormError('Please enter your name.');
+      }
+      if (!status_no.checked && !status_yes.checked) {
+        e.preventDefault();
+        return setFormError('Please select whether you will be coming or not.');
+      }
+    };
+
     for(var i=0; i<nav_items.length; i++) {
       (function(idx) {
         var el = nav_items[idx];
@@ -256,7 +320,7 @@
           var targetEl = elem(pageId);
           var targetToggle = toggleDisplay(targetEl.style.display);
           hidePages();
-          if (window.innerWidth <= 320) {
+          if (window.innerWidth <= 640) {
             nav.style.display = 'none';
           }
           targetEl.style.display = targetToggle;
@@ -265,10 +329,10 @@
     };
   };
   </script>
-<!--   <link href="https://fonts.googleapis.com/css?family=Alex+Brush" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Alex+Brush" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Tangerine" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Vollkorn" rel="stylesheet" type="text/css">
- --></head>
+</head>
 <body>
   <div id="background_overlay" class="background-overlay">
     <div class="mobile-menu">
@@ -356,15 +420,52 @@
 
       <p>There is plenty of parking space available.</p>
 
-<!--       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2461.345718843699!2d5.496865951017797!3d51.90940328895211!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c65615d9392785%3A0xcde2f51871b70bfd!2sKasteel+Wijenburg!5e0!3m2!1sen!2snl!4v1460317065010" width="800" height="600" frameborder="0" style="border:0" allowfullscreen></iframe>
- -->    </div>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2461.345718843699!2d5.496865951017797!3d51.90940328895211!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c65615d9392785%3A0xcde2f51871b70bfd!2sKasteel+Wijenburg!5e0!3m2!1sen!2snl!4v1460317065010" frameborder="0" style="border:0" allowfullscreen></iframe>
+    </div>
     <div class="page" id="rsvp">
       <h2 class="page-title">RSVP</h2>
       <div class="circle-block"><span class="us-circle lara-circle"></span><i>We'd love to know who to expect, so we can make sure there's enough food and drinks!</i></div>
 
-      <div>
-        RSVP by returning the card sent with the invitation or emailing us at: <a href="mailto:dave_en_lara_trouwen@gmail.com">dave_en_lara_trouwen@gmail.com</a>
-      </div>
+      <form method="post" action="mail.php">
+        <br>
+        <label for="name_1">Name</label>
+        <input name="name_1" id="name_1"><br><br><br>
+
+        <input type="radio" name="status" id="status_no" value="no"> Sorry, we cannot come<br><br>
+        <input type="radio" name="status" id="status_yes" value="yes"> We will be coming. See you there!<br>
+
+        <h3 class="page-title">Guest 1</h3>
+        <label for="starter_1">Starter</label>
+        <select id="starter_1" name="starter_1">
+          <option value="meat">Meat</option>
+          <option value="fish">Fish</option>
+          <option value="vege">Vegetarian</option>
+        </select><br><br>
+
+        <label for="main_1">Main course</label>
+        <select id="main_1" name="main_1">
+          <option value="meat">Meat</option>
+          <option value="fish">Fish</option>
+          <option value="vege">Vegetarian</option>
+        </select><br><br>
+
+        <h3 class="page-title">Guest 2</h3>
+        <label for="starter_2">Starter</label>
+        <select id="starter_2" name="starter_2">
+          <option value="meat">Meat</option>
+          <option value="fish">Fish</option>
+          <option value="vege">Vegetarian</option>
+        </select><br><br>
+
+        <label for="main_2">Main course</label>
+        <select id="main_2" name="main_2">
+          <option value="meat">Meat</option>
+          <option value="fish">Fish</option>
+          <option value="vege">Vegetarian</option>
+        </select><br><br>
+        <div id="form_error"></div>
+        <input type="submit" id="submit_rsvp" value="Send RSVP">
+      </form>
     </div>
     <div class="page" id="about_us">
       <h2 class="page-title">The Tale of the Mage and Paladin</h2>
