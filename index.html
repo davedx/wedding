@@ -98,19 +98,19 @@
       display: block;
       background-color: rgba(255, 255, 255, 0.95);
       position: fixed;
+      z-index: 100;
       top: 0;
       width: 100%;
       height: 40px;
     }
     .menu-open {
       position: absolute;
-      right: 7px;
-      top: 4px;
-      width: 35px;
-      height: 31px;
-      background-image: url('rose.png');
-      background-size: cover;
+      right: 9px;
+      top: 7px;
+      color: #c82425;
       cursor: pointer;
+      font-family: 'Tangerine', cursive;
+      font-size: 30px;
     }
   }
   .page {
@@ -259,6 +259,7 @@
   }
   input, select {
     font-size: 20px;
+    max-width: 100%;
   }
   label {
     margin-right: 8px;
@@ -318,8 +319,10 @@
     var menu_programme = elem('menu_programme');
     var page_programme = elem('programme');
     var submit_rsvp = elem('submit_rsvp');
-    var status_no = elem('status_no');
-    var status_yes = elem('status_yes');
+    var opt_status_no = elem('opt_status_no');
+    var opt_status_yes = elem('opt_status_yes');
+    var opt_type_day = elem('opt_type_day');
+    var opt_type_evening = elem('opt_type_evening');
     var name_1 = elem('name_1');
     var starter_1 = elem('starter_1');
     var main_1 = elem('main_1');
@@ -385,11 +388,16 @@
         e.preventDefault();
         return setFormError('Please enter your name.');
       }
-      if (!status_no.checked && !status_yes.checked) {
+      if (!opt_status_no.checked && !opt_status_yes.checked) {
         e.preventDefault();
         return setFormError('Please select whether you will be coming or not.');
       }
-      if (status_yes.checked) {
+      if (!opt_type_day.checked && !opt_type_evening.checked) {
+        e.preventDefault();
+        return setFormError('Please select whether you received a day or an evening invitation.');
+      }
+      if (opt_status_yes.checked &&
+        opt_type_day.checked) {
         // validate meals
         if (starter_1.value === 'none' ||
           main_1.value === 'none') {
@@ -399,13 +407,19 @@
       }
     };
 
-    status_yes.onclick = function () {
+    opt_status_yes.onclick = function () {
+    };
+
+    opt_status_no.onclick = function () {
+    };
+
+    opt_type_day.onclick = function () {
       menu_options.style.display = 'block';
     };
 
-    status_no.onclick = function () {
+    opt_type_evening.onclick = function () {
       menu_options.style.display = 'none';
-    };
+    }
 
     for(var i=0; i<nav_items.length; i++) {
       (function(idx) {
@@ -433,7 +447,7 @@
     <div class="mobile-menu">
       <div class="lang" id="m_nl">🇳🇱</div>
       <div class="lang" id="m_en">🇬🇧</div>
-      <div class="menu-open" id="menu_open"></div>
+      <div class="menu-open" id="menu_open">Menu</div>
     </div>
     <div class="lang-desktop">
       <div class="lang" id="d_nl">🇳🇱</div>
@@ -532,54 +546,57 @@
     </div>
     <div class="page" id="rsvp">
       <h2 class="page-title" id="title_rsvp">RSVP</h2>
-      <div class="circle-block"><span class="us-circle lara-circle"></span><i>We'd love to know who to expect, so we can make sure there's enough food and drinks!</i></div>
+      <div class="circle-block"><span class="us-circle lara-circle"></span><i id="rsvp_1">We'd love to know who to expect, so we can make sure there's enough food and drinks!</i></div>
 
       <form method="post" action="mail.php">
         <br>
-        <label for="name_1">Name</label>
+        <label for="name_1" id="lbl_Name">Name</label>
         <input name="name_1" id="name_1"><br><br><br>
 
-        <input type="radio" name="status" id="status_no" value="no"> Sorry, we cannot come<br><br>
-        <input type="radio" name="status" id="status_yes" value="yes"> We will be coming<br>
+        <input type="radio" name="status" id="opt_status_no" value="no"><span id="opt_status_1"> Sorry, we cannot come</span><br>
+        <input type="radio" name="status" id="opt_status_yes" value="yes"><span id="opt_status_2"> We will be coming</span><br><br>
+
+        <input type="radio" name="type" id="opt_type_day" value="day"><span id="opt_type_1"> Invited as day guest</span><br>
+        <input type="radio" name="type" id="opt_type_evening" value="evening"><span id="opt_type_1"> Invited as evening guest</span><br><br>
 
         <div id="menu_options">
-          <h3 class="page-title">Guest 1</h3>
-          <label for="starter_1">Starter</label>
+          <h3 class="page-title" id="title_guest_1">Guest 1</h3>
+          <label for="starter_1" id="lbl_starter_1">Starter</label>
           <select id="starter_1" name="starter_1">
             <option value="none"></option>
-            <option value="meat">Meat</option>
-            <option value="fish">Fish</option>
-            <option value="vege">Vegetarian</option>
+            <option value="meat" id="opt_starter_1_1">Carpaccio of lightly smoked beef sirloin, truffle mayonnaise, Parmesan biscuit, tomato concassé and crostini with olive tapenade</option>
+            <option value="fish" id="opt_starter_1_2">Albacore tuna with salsa of red onion, lettuce, cucumber-curd, roasted tomatoes, black olives and fried quail egg</option>
+            <option value="vege" id="opt_starter_1_3">Taster of terrine of tomato, mozzarella and basil pesto, champagne flute with Italian minestrone a la cappucino and cannelloni of beetroot with goat cheese</option>
           </select><br><br>
 
-          <label for="main_1">Main course</label>
+          <label for="main_1" id="lbl_main_1">Main</label>
           <select id="main_1" name="main_1">
             <option value="none"></option>
-            <option value="meat">Meat</option>
-            <option value="fish">Fish</option>
-            <option value="vege">Vegetarian</option>
+            <option value="meat" id="opt_main_1_1">Beef rump with Reypenear cheese crumbs, spinach, pommes dauphin, ratatouille-tart and gravy with black garlic</option>
+            <option value="fish" id="opt_main_1_2">Crusted sea bass, jasmine rice, bok choy, butter sauce with lime leaves, coconut froth</option>
+            <option value="vege" id="opt_main_1_3">Tarte tatin of asparagus and goat cheese, with tomato sorbet and balsamic cream</option>
           </select><br><br>
 
-          <h3 class="page-title">Guest 2</h3>
-          <label for="starter_2">Starter</label>
+          <h3 class="page-title" id="title_guest_2">Guest 2</h3>
+          <label for="starter_2" id="lbl_starter_2">Starter</label>
           <select id="starter_2" name="starter_2">
             <option value="none"></option>
-            <option value="meat">Meat</option>
-            <option value="fish">Fish</option>
-            <option value="vege">Vegetarian</option>
+            <option value="meat" id="opt_starter_2_1">Carpaccio of lightly smoked beef sirloin, truffle mayonnaise, Parmesan biscuit, tomato concassé and crostini with olive tapenade</option>
+            <option value="fish" id="opt_starter_2_2">Albacore tuna with salsa of red onion, lettuce, cucumber-curd, roasted tomatoes, black olives and fried quail egg</option>
+            <option value="vege" id="opt_starter_2_3">Taster of terrine of tomato, mozzarella and basil pesto, champagne flute with Italian minestrone a la cappucino and cannelloni of beetroot with goat cheese</option>
           </select><br><br>
 
-          <label for="main_2">Main course</label>
+          <label for="main_2" id="lbl_main_2">Main</label>
           <select id="main_2" name="main_2">
             <option value="none"></option>
-            <option value="meat">Meat</option>
-            <option value="fish">Fish</option>
-            <option value="vege">Vegetarian</option>
+            <option value="meat" id="opt_main_2_1">Beef rump with Reypenear cheese crumbs, spinach, pommes dauphin, ratatouille-tart and gravy with black garlic</option>
+            <option value="fish" id="opt_main_2_2">Crusted sea bass, jasmine rice, bok choy, butter sauce with lime leaves, coconut froth</option>
+            <option value="vege" id="opt_main_2_3">Tarte tatin of asparagus and goat cheese, with tomato sorbet and balsamic cream</option>
           </select>
         </div>
         <br><br>
         <div id="form_error"></div>
-        <input type="submit" id="submit_rsvp" value="Send RSVP">
+        <button type="submit" id="submit_rsvp">Send RSVP</button>
       </form>
     </div>
     <div class="page" id="about_us">
