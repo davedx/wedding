@@ -1,9 +1,14 @@
+<!-- WELCOME TO OUR WEDDING WEBSITE! I DECIDED TO PUT THIS SITE TOGETHER USING BARE BONES HTML, CSS AND JAVASCRIPT. IN TODAY'S TERMINOLOGY
+  IT'S A "SINGLE PAGE APP", BECAUSE WHEN YOU NAVIGATE THROUGH THE SITE, IT SHOWS AND HIDES THE DIFFERENT PAGES INSTEAD OF LOADING THEM INDIVIDUALLY FROM A SERVER. NOT USING A FRAMEWORK LIKE ANGULAR, OR A LIBRARY LIKE JQUERY OR BOOTSTRAP, KEEPS THE PAGE TO A TINY 25KB OR SO, BUT YOU CAN ALREADY SEE HOW THE CODE IS STARTING TO LOOK UNMAINTAINABLE. HAVING SAID THAT, A GOOD MODULE SYSTEM (I.E. JUST SPLITTING EVERYTHING UP INTO COMPONENTS) WOULD LET YOU GO A LOT FURTHER WITHOUT INTRODUCING ANY OTHER EXTERNAL DEPS. IT'S GREAT HOW FAR "VANILLA JAVASCRIPT" CAN GET YOU, AND HOW FAST AND LEAN AN APP WILL BE IF IT HAS NO DEPS.
+  
+  THE ONLY THING WE ACTUALLY DID BREAK OFF WAS THE JSON STRINGS TABLE, BECAUSE WE WERE BOTH WORKING IN THE SAME AREA AND GOT CONFLICTS. I STILL FIND IT AMAZING THAT THE DUKE NUKEM 3D SOURCE FILES WERE SO GIGANTIC. HOW DID THEY MANAGE MERGES, WORKING LIKE THAT, BEFORE GIT WAS EVEN AROUND?! IT MUST HAVE BEEN...... HELL.
+-->
 <!doctype html>
 <html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>Dave en Lara gaan trouwen</title>
+  <title id="page_title">Dave and Lara are getting married</title>
   <style>
   body {
     background-image: url('kasteel-wijenburg-echteld-slotgracht.jpg');
@@ -267,6 +272,12 @@
   #menu_options {
     display: none;
   }
+  #menu_options label {
+    color: #c82425;;
+  }
+  .menu_option span {
+    margin-left: 20px;
+  }
   #submit_rsvp {
     font-size: 22px;
     border: 1px solid grey;
@@ -324,10 +335,10 @@
     var opt_type_day = elem('opt_type_day');
     var opt_type_evening = elem('opt_type_evening');
     var name_1 = elem('name_1');
-    var starter_1 = elem('starter_1');
-    var main_1 = elem('main_1');
-    var starter_2 = elem('starter_2');
-    var main_2 = elem('main_2');
+    var starter_1_0 = elem('starter_1_0');
+    var main_1_0 = elem('main_1_0');
+    // var starter_2 = elem('starter_2');
+    // var main_2 = elem('main_2');
     var form_error = elem('form_error');
     var background_overlay = elem('background_overlay');
     var menu_open = elem('menu_open');
@@ -399,8 +410,8 @@
       if (opt_status_yes.checked &&
         opt_type_day.checked) {
         // validate meals
-        if (starter_1.value === 'none' ||
-          main_1.value === 'none') {
+        if (starter_1_0.checked ||
+          main_1_0.checked) {
           e.preventDefault();
           return setFormError('Please select meal choices for Guest 1.');
         }
@@ -433,6 +444,7 @@
             nav.style.display = 'none';
           }
           targetEl.style.display = targetToggle;
+          window.scrollTo(0, 0);
         };
       })(i);
     };
@@ -557,42 +569,110 @@
         <input type="radio" name="status" id="opt_status_yes" value="yes"><span id="opt_status_2"> We will be coming</span><br><br>
 
         <input type="radio" name="type" id="opt_type_day" value="day"><span id="opt_type_1"> Invited as day guest</span><br>
-        <input type="radio" name="type" id="opt_type_evening" value="evening"><span id="opt_type_1"> Invited as evening guest</span><br><br>
+        <input type="radio" name="type" id="opt_type_evening" value="evening"><span id="opt_type_2"> Invited as evening guest</span><br><br>
 
         <div id="menu_options">
           <h3 class="page-title" id="title_guest_1">Guest 1</h3>
-          <label for="starter_1" id="lbl_starter_1">Starter</label>
-          <select id="starter_1" name="starter_1">
-            <option value="none"></option>
-            <option value="meat" id="opt_starter_1_1">Carpaccio of lightly smoked beef sirloin, truffle mayonnaise, Parmesan biscuit, tomato concassé and crostini with olive tapenade</option>
-            <option value="fish" id="opt_starter_1_2">Albacore tuna with salsa of red onion, lettuce, cucumber-curd, roasted tomatoes, black olives and fried quail egg</option>
-            <option value="vege" id="opt_starter_1_3">Taster of terrine of tomato, mozzarella and basil pesto, champagne flute with Italian minestrone a la cappucino and cannelloni of beetroot with goat cheese</option>
-          </select><br><br>
+          <label for="starter_1" id="lbl_starter_1">Starter</label><br>
+
+          <table>
+            <tr><td valign="top">
+              <input type="radio" name="starter_1" id="starter_1_0" value="none" checked>
+            </td><td id="opt_starter_1_0">
+              None
+            </td></tr>
+            <tr><td valign="top">
+              <input type="radio" name="starter_1" id="starter_1_1" value="meat">
+            </td><td id="opt_starter_1_1">
+              Carpaccio of lightly smoked beef sirloin, truffle mayonnaise, Parmesan biscuit, tomato concassé and crostini with olive tapenade
+            </td></tr>
+            <tr><td valign="top">
+              <input type="radio" name="starter_1" id="starter_1_2" value="fish">
+            </td><td id="opt_starter_1_2">
+              Albacore tuna with salsa of red onion, lettuce, cucumber-curd, roasted tomatoes, black olives and fried quail egg
+            </td></tr>
+            <tr><td valign="top">
+              <input type="radio" name="starter_1" id="starter_1_3" value="vege">
+            </td><td id="opt_starter_1_3">
+              Taster of terrine of tomato, mozzarella and basil pesto, champagne flute with Italian minestrone a la cappucino and cannelloni of beetroot with goat cheese
+            </td></tr>
+          </table>
 
           <label for="main_1" id="lbl_main_1">Main</label>
-          <select id="main_1" name="main_1">
-            <option value="none"></option>
-            <option value="meat" id="opt_main_1_1">Beef rump with Reypenear cheese crumbs, spinach, pommes dauphin, ratatouille-tart and gravy with black garlic</option>
-            <option value="fish" id="opt_main_1_2">Crusted sea bass, jasmine rice, bok choy, butter sauce with lime leaves, coconut froth</option>
-            <option value="vege" id="opt_main_1_3">Tarte tatin of asparagus and goat cheese, with tomato sorbet and balsamic cream</option>
-          </select><br><br>
+
+          <table>
+            <tr><td valign="top">
+              <input type="radio" name="main_1" id="main_1_0" value="none" checked>
+            </td><td id="opt_main_1_0">
+              None
+            </td></tr>
+            <tr><td valign="top">
+              <input type="radio" name="main_1" id="main_1_1" value="meat">
+            </td><td id="opt_main_1_1">
+              Beef rump with Reypenear cheese crumbs, spinach, pommes dauphin, ratatouille-tart and gravy with black garlic
+            </td></tr>
+            <tr><td valign="top">
+              <input type="radio" name="main_1" id="main_1_2" value="fish">
+            </td><td id="opt_main_1_2">
+              Crusted sea bass, jasmine rice, bok choy, butter sauce with lime leaves, coconut froth
+            </td></tr>
+            <tr><td valign="top">
+              <input type="radio" name="main_1" id="main_1_3" value="vege">
+            </td><td id="opt_main_1_3">
+              Tarte tatin of asparagus and goat cheese, with tomato sorbet and balsamic cream
+            </td></tr>
+          </table>
 
           <h3 class="page-title" id="title_guest_2">Guest 2</h3>
           <label for="starter_2" id="lbl_starter_2">Starter</label>
-          <select id="starter_2" name="starter_2">
-            <option value="none"></option>
-            <option value="meat" id="opt_starter_2_1">Carpaccio of lightly smoked beef sirloin, truffle mayonnaise, Parmesan biscuit, tomato concassé and crostini with olive tapenade</option>
-            <option value="fish" id="opt_starter_2_2">Albacore tuna with salsa of red onion, lettuce, cucumber-curd, roasted tomatoes, black olives and fried quail egg</option>
-            <option value="vege" id="opt_starter_2_3">Taster of terrine of tomato, mozzarella and basil pesto, champagne flute with Italian minestrone a la cappucino and cannelloni of beetroot with goat cheese</option>
-          </select><br><br>
+
+          <table>
+            <tr><td valign="top">
+              <input type="radio" name="starter_2" id="starter_2_0" value="none" checked>
+            </td><td id="opt_starter_2_0">
+              None
+            </td></tr>
+            <tr><td valign="top">
+              <input type="radio" name="starter_2" id="starter_2_1" value="meat">
+            </td><td id="opt_starter_2_1">
+              Carpaccio of lightly smoked beef sirloin, truffle mayonnaise, Parmesan biscuit, tomato concassé and crostini with olive tapenade
+            </td></tr>
+            <tr><td valign="top">
+              <input type="radio" name="starter_2" id="starter_2_2" value="fish">
+            </td><td id="opt_starter_2_2">
+              Albacore tuna with salsa of red onion, lettuce, cucumber-curd, roasted tomatoes, black olives and fried quail egg
+            </td></tr>
+            <tr><td valign="top">
+              <input type="radio" name="starter_2" id="starter_2_3" value="vege">
+            </td><td id="opt_starter_2_3">
+              Taster of terrine of tomato, mozzarella and basil pesto, champagne flute with Italian minestrone a la cappucino and cannelloni of beetroot with goat cheese
+            </td></tr>
+          </table>
 
           <label for="main_2" id="lbl_main_2">Main</label>
-          <select id="main_2" name="main_2">
-            <option value="none"></option>
-            <option value="meat" id="opt_main_2_1">Beef rump with Reypenear cheese crumbs, spinach, pommes dauphin, ratatouille-tart and gravy with black garlic</option>
-            <option value="fish" id="opt_main_2_2">Crusted sea bass, jasmine rice, bok choy, butter sauce with lime leaves, coconut froth</option>
-            <option value="vege" id="opt_main_2_3">Tarte tatin of asparagus and goat cheese, with tomato sorbet and balsamic cream</option>
-          </select>
+
+          <table>
+            <tr><td valign="top">
+              <input type="radio" name="main_2" id="main_2_0" value="none" checked>
+            </td><td id="opt_main_2_0">
+              None
+            </td></tr>
+            <tr><td valign="top">
+              <input type="radio" name="main_2" id="main_2_1" value="meat">
+            </td><td id="opt_main_2_1">
+              Beef rump with Reypenear cheese crumbs, spinach, pommes dauphin, ratatouille-tart and gravy with black garlic
+            </td></tr>
+            <tr><td valign="top">
+              <input type="radio" name="main_2" id="main_2_2" value="fish">
+            </td><td id="opt_main_2_2">
+              Crusted sea bass, jasmine rice, bok choy, butter sauce with lime leaves, coconut froth
+            </td></tr>
+            <tr><td valign="top">
+              <input type="radio" name="main_2" id="main_2_3" value="vege">
+            </td><td id="opt_main_2_3">
+              Tarte tatin of asparagus and goat cheese, with tomato sorbet and balsamic cream
+            </td></tr>
+          </table>
         </div>
         <br><br>
         <div id="form_error"></div>
