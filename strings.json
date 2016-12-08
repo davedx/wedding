@@ -79,7 +79,11 @@
     "aboutus_title_2": "And they lived happily ever after",
     "aboutus_1": "Always attracted to secret -- some might say sneaky -- planning, Dave invited Lara to a surprise weekend to Paris, a romantic getaway -- with two kids along for the ride. As the heavens opened and rain poured down, they struggled to push the pram and buggy up the steep slopes of Montmartre to our apartment.",
     "aboutus_2": "Next day they went for a walk and ended up in a little Parisian park, where Dave casually suggested to Lara that they climb the steps of a bridge (which the buggy and pram would never go up!). Suddenly, Lara realised something was afoot, and before she knew it, Dave had the ring in his hand and the question on his lips. Shocked -- and then very happy -- Lara said yes!",
-    "aboutus_summary": "Our wedding is on the 15th April 2017 at <a class=\"nav-item\" data-id=\"venue\">Kasteel Wijenburg</a>. We are excited to share this special day with all of you. See you there!"
+    "aboutus_summary": "Our wedding is on the 15th April 2017 at <a class=\"nav-item\" data-id=\"venue\">Kasteel Wijenburg</a>. We are excited to share this special day with all of you. See you there!",
+    "err_1": "Please enter your name.",
+    "err_2": "Please select whether you will be coming or not.",
+    "err_3": "Please select whether you received a day or an evening invitation.",
+    "err_4": "Please select meal choices for Guest 1."
   },
   "nl": {
     "page_title": "Dave en Lara gaan trouwen",
@@ -149,7 +153,7 @@
     "title_aboutus": "Het Sprookje van de Mage en Paladin",
     "aboutus_title_1": "Er was eens een dag, in Azeroth",
     "aboutus_dave_1": "\"Zeg, wat is nu beter, een tank of healer paladin?\"",
-    "aboutus_dave_2": "\"Nutty heeft afgesproken met Woz in Londen, misschien is het wel leuk om samen koffie te drinken als ik ooit in Amsterdam ben?\"",
+    "aboutus_dave_2": "\"Nutty heeft met Woz afgesproken in Londen, misschien is het wel leuk om samen koffie te drinken als ik ooit in Amsterdam ben?\"",
     "aboutus_dave_3": "\"Zit jij op Facebook?\"",
     "aboutus_dave_4": "Hoe bedoel je het langzaam aan doen? Maar uiteindelijk bracht ik de moed op om Lara te zeggen: \"Ik vind je leuk, en ik kom naar Amsterdam om je te ontmoeten!\" Het was niet het makkelijkste begin van een relatie, wonend in verschillende landen en elkaar alleen kennend van hoe hoog mijn DPS in raids was en hoe goed Lara was in het roepen dat mensen <em>NIET IN DE BLOBS MOESTEN STAAN</em>. Maar op de een of andere manier werkte het voor ons, en na een enigszins lange omweg via India, verhuisde ik uiteindelijk naar Nederland om bij haar te zijn. En daar bleef ik.",
     "aboutus_lara_1": "Hoe kan die vent nog raiden met al dat geklets van hem?!",
@@ -161,7 +165,10 @@
     "aboutus_title_2": "En ze leefden nog lang en gelukkig",
     "aboutus_1": "Altijd vol geheime -- sommigen zouden ze stiekem noemen -- plannetjes, nodigde Dave Lara uit voor een verrassingsweekend in Parijs, een romantisch uitje -- met twee kinderen op sleeptouw. Terwijl de hemel open brak en de regen naar beneden goot, worstelden ze zich met buggy en kinderwagen over de steile, smalle straatjes van Montmartre naar hun appartement.",
     "aboutus_2": "De volgende dag gingen ze wandelen en kwamen ze uit in een klein Parijs park, waar Dave terloops aan Lara voorstelde om op een bruggetje het uitzicht te bekijken (waar de buggy en kinderwagen nooit naar boven zouden kunnen!). Opeens besefte Lara dat er iets gaande was, maar voordat ze het wist, had Dave de ring al in zijn hand en de vraag op zijn lippen. In shock -- en daarna heel blij -- zei Lara ja!",
-    "aboutus_summary": "Onze bruiloft is op 15 April 2017 op <a class=\"nav-item\" data-id=\"venue\">Kasteel Wijenburg</a>. We verheugen ons erop deze bijzondere dag met jullie te mogen delen. Tot dan!"
-
+    "aboutus_summary": "Onze bruiloft is op 15 April 2017 op <a class=\"nav-item\" data-id=\"venue\">Kasteel Wijenburg</a>. We verheugen ons erop deze bijzondere dag met jullie te mogen delen. Tot dan!",
+    "err_1": "Voer alsjeblieft een naam in.",
+    "err_2": "Geef alsjeblieft aan of je komt of niet.",
+    "err_3": "Geef alsjeblieft aan of je een uitnodiging hebt ontvangen voor de dag of avond.",
+    "err_4": "Selecteer alsjeblieft de maaltijd keuzes voor Gast 1."
   }  
 }
