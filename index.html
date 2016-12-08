@@ -65,7 +65,6 @@
       font-size: 40px;
     }
   }
-
   .nav {
     font-family: 'Vollkorn', serif;
     position: fixed;
@@ -308,6 +307,7 @@
     }
 
     var strings = {};
+    var current_lang = 'en';
 
     function loadStrings() {
       var x;
@@ -337,8 +337,6 @@
     var name_1 = elem('name_1');
     var starter_1_0 = elem('starter_1_0');
     var main_1_0 = elem('main_1_0');
-    // var starter_2 = elem('starter_2');
-    // var main_2 = elem('main_2');
     var form_error = elem('form_error');
     var background_overlay = elem('background_overlay');
     var menu_open = elem('menu_open');
@@ -364,6 +362,7 @@
     };    
 
     function setStrings(lang) {
+      current_lang = lang;
       var str = strings[lang];
       for(var k in str) {
         var val = str[k];
@@ -389,23 +388,24 @@
       setStrings('en');
     };
 
-    function setFormError(text) {
+    function setFormError(key) {
       form_error.style.display = 'block';
+      var text = strings[current_lang][key];
       form_error.innerHTML = '<span class="symbol">&#9888;</span> <span class="message">' + text + '</span>';
     }
 
     submit_rsvp.onclick = function (e) {
       if (name_1.value.length <= 0) {
         e.preventDefault();
-        return setFormError('Please enter your name.');
+        return setFormError('err_1');
       }
       if (!opt_status_no.checked && !opt_status_yes.checked) {
         e.preventDefault();
-        return setFormError('Please select whether you will be coming or not.');
+        return setFormError('err_2');
       }
       if (!opt_type_day.checked && !opt_type_evening.checked) {
         e.preventDefault();
-        return setFormError('Please select whether you received a day or an evening invitation.');
+        return setFormError('err_3');
       }
       if (opt_status_yes.checked &&
         opt_type_day.checked) {
@@ -413,7 +413,7 @@
         if (starter_1_0.checked ||
           main_1_0.checked) {
           e.preventDefault();
-          return setFormError('Please select meal choices for Guest 1.');
+          return setFormError('err_4');
         }
       }
     };
@@ -682,37 +682,37 @@
     <div class="page" id="about_us">
       <h2 class="page-title" id="title_aboutus">The Tale of the Mage and Paladin</h2>
       
-      <h3 class="page-title">Once upon a time, in Azeroth</h3>
+      <h3 class="page-title" id="aboutus_title_1">Once upon a time, in Azeroth</h3>
 
-      <div class="circle-block"><span class="us-circle dave-circle"></span><i class="vertically-centered">"So, what's better, a tank or healer paladin?"</i></div>
+      <div class="circle-block"><span class="us-circle dave-circle"></span><i class="vertically-centered" id="aboutus_dave_1">"So, what's better, a tank or healer paladin?"</i></div>
 
-      <p>"Nutty is going to meet up with Woz in London, if I'm ever in Amsterdam maybe it would be fun to have a coffee together?"</p>
+      <p id="aboutus_dave_2">"Nutty is going to meet up with Woz in London, if I'm ever in Amsterdam maybe it would be fun to have a coffee together?"</p>
 
-      <p>"Are you on Facebook?"</p>
+      <p id="aboutus_dave_3">"Are you on Facebook?"</p>
 
-      <p>Talk about taking it slowly. But eventually, I worked up the courage to tell Lara straight: "I like you, and I'm coming to Amsterdam to see you!" It wasn't the easiest start to a relationship, living in different countries and only knowing each other through how high my DPS was in raids and how good at telling other people <em>WATCH OUT FOR THE BLOBS</em> Lara was. But somehow, we made it work, and after I took a somewhat long detour to India, I finally moved to the Netherlands to be with her. And that's where I stayed.</p>
+      <p id="aboutus_dave_4">Talk about taking it slowly. But eventually, I worked up the courage to tell Lara straight: "I like you, and I'm coming to Amsterdam to see you!" It wasn't the easiest start to a relationship, living in different countries and only knowing each other through how high my DPS was in raids and how good at telling other people <em>WATCH OUT FOR THE BLOBS</em> Lara was. But somehow, we made it work, and after I took a somewhat long detour to India, I finally moved to the Netherlands to be with her. And that's where I stayed.</p>
 
-      <div class="circle-block"><span class="us-circle lara-circle"></span><i class="vertically-centered">How is this guy still raiding with all this talking he's doing?!</i></div>
+      <div class="circle-block"><span class="us-circle lara-circle"></span><i class="vertically-centered" id="aboutus_lara_1">How is this guy still raiding with all this talking he's doing?!</i></div>
 
-      <p>Sometime later...</p>
+      <p id="aboutus_lara_2">Sometime later...</p>
       
-      <p><i>Music, coffee, Facebook, what IS he on about?!</i></p>
+      <p><i id="aboutus_lara_3">Music, coffee, Facebook, what IS he on about?!</i></p>
       
-      <p>Sometime later...</p>
+      <p id="aboutus_lara_4">Sometime later...</p>
 
-      <p><i>Yay! He's online!</i></p>
+      <p><i id="aboutus_lara_5">Yay! He's online!</i></p>
 
-      <p>Not the most obvious of pick up lines, but perseverance comes a long way. Perseverance let me meet you in Amsterdam. Perseverance had us meet again. Perseverance sent me after you in India. And love brought us to where we are now - with our children, our very "special" dog, our rabbit, our house and our life together.</p>
+      <p id="aboutus_lara_6">Not the most obvious of pick up lines, but perseverance comes a long way. Perseverance let me meet you in Amsterdam. Perseverance had us meet again. Perseverance sent me after you in India. And love brought us to where we are now - with our children, our very "special" dog, our rabbit, our house and our life together.</p>
 
-      <h3 class="page-title">And they lived happily ever after</h3>
+      <h3 class="page-title" id="aboutus_title_2">And they lived happily ever after</h3>
 
-      <p>Always attracted to secret -- some might say sneaky -- planning, Dave invited Lara to a surprise weekend to Paris, a romantic getaway -- with two kids along for the ride. As the heavens opened and rain poured down, they struggled to push the pram and buggy up the steep slopes of Montmartre to our apartment.</p>
+      <p id="aboutus_1">Always attracted to secret -- some might say sneaky -- planning, Dave invited Lara to a surprise weekend to Paris, a romantic getaway -- with two kids along for the ride. As the heavens opened and rain poured down, they struggled to push the pram and buggy up the steep slopes of Montmartre to our apartment.</p>
 
-      <p>Next day they went for a walk and ended up in a little Parisian park, where Dave casually suggested to Lara that they climb the steps of a bridge (which the buggy and pram would never go up!). Suddenly, Lara realised something was afoot, and before she knew it, Dave had the ring in his hand and the question on his lips. Shocked -- and then very happy -- Lara said yes!</p>
+      <p id="aboutus_2">Next day they went for a walk and ended up in a little Parisian park, where Dave casually suggested to Lara that they climb the steps of a bridge (which the buggy and pram would never go up!). Suddenly, Lara realised something was afoot, and before she knew it, Dave had the ring in his hand and the question on his lips. Shocked -- and then very happy -- Lara said yes!</p>
 
       <div class="engagment-circle"></div>
 
-      <p class="about-us-summary">Our wedding is on the 15th April 2017 at <a class="nav-item" data-id="venue">Kasteel Wijenburg</a>. We are excited to share this special day with all of you. See you there!</p>
+      <p class="about-us-summary" id="aboutus_summary">Our wedding is on the 15th April 2017 at <a class="nav-item" data-id="venue">Kasteel Wijenburg</a>. We are excited to share this special day with all of you. See you there!</p>
 
     </div>
   </div>
