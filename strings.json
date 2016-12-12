@@ -89,8 +89,9 @@
     "err_3": "Please select whether you received a day or an evening invitation.",
     "err_4": "Please select meal choices for Guest 1.",
     "err_5": "Please enter how many guests will be coming.",
-    "alert_rsvp": "Thank you for sending your RSVP!",
-    "account_name": "Account name"
+    "account_name": "Account name",
+    "title_evening_guests": "Number of guests",
+    "lbl_NumberEveningGuests": "Guests"
   },
   "nl": {
     "page_title": "Dave en Lara gaan trouwen",
@@ -182,7 +183,8 @@
     "err_3": "Geef alsjeblieft aan of je een uitnodiging hebt ontvangen voor de dag of avond.",
     "err_4": "Selecteer alsjeblieft de maaltijd keuzes voor Gast 1.",
     "err_5": "Geef alsjeblieft aan met hoeveel jullie komen.",
-    "alert_rsvp": "Bedankt voor het sturen van de RSVP!",
-    "account_name": "Ten name van"
+    "account_name": "Ten name van",
+    "title_evening_guests": "Aantal gasten",
+    "lbl_NumberEveningGuests": "Gasten"
   }  
 }
