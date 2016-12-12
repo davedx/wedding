@@ -190,9 +190,9 @@
     "account_name": "Ten name van",
     "title_evening_guests": "Aantal gasten",
     "lbl_NumberEveningGuests": "Gasten",
-    "title_important_info": "Important information",
-    "venue_address": "Venue address:<br /><a href=\"http://www.kasteelwijenburg.nl/\">Kasteel Wijenburg</a><br />Voorstraat 2<br />4054 MX Echteld",
-    "hotel_address": "Hotel address:<br /><a href=\"http://www.hotelvanbalveren.nl/\">Hotel en Restaurant van Balveren</a><br />Voorstraat 8<br />4054 MX Echteld",
-    "hotel_info": "The hotel is just in front of the venue, an easy minute's walk."
+    "title_important_info": "Belangrijke informatie",
+    "venue_address": "Adres trouwlocatie:<br /><a href=\"http://www.kasteelwijenburg.nl/\">Kasteel Wijenburg</a><br />Voorstraat 2<br />4054 MX Echteld",
+    "hotel_address": "Adres hotel:<br /><a href=\"http://www.hotelvanbalveren.nl/\">Hotel en Restaurant van Balveren</a><br />Voorstraat 8<br />4054 MX Echteld",
+    "hotel_info": "Het hotel ligt net buiten de poort van de trouwlocatie, op een minuut loopafstand."
   }  
 }
