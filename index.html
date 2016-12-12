@@ -335,6 +335,7 @@
     loadStrings();
 
     var menu_programme = elem('menu_programme');
+    var menu_important_info = elem('menu_important_info');
     var page_programme = elem('programme');
     var submit_rsvp = elem('submit_rsvp');
     var opt_status_no = elem('opt_status_no');
@@ -490,6 +491,7 @@
     </header>
     <nav class="nav" id="nav">
       <ul class="nav-items">
+        <li class="nav-item" data-id="important_info" id="menu_important_info">Important info</li>
         <li class="nav-item" data-id="programme" id="menu_programme">Programme</li>
         <li class="nav-item" data-id="about_us" id="menu_aboutus">About us</li>
         <li class="nav-item" data-id="registry" id="menu_registry">Registry</li>
@@ -497,6 +499,21 @@
         <li class="nav-item" data-id="rsvp" id="menu_rsvp">RSVP</li>
       </ul>
     </nav>
+    <div class="page" id="important_info">
+      <h2 class="page-title" id="title_important_info">Important information</h2>
+
+      <p id="venue_address">Venue address:<br />
+        <a href="http://www.kasteelwijenburg.nl/">Kasteel Wijenburg</a><br />
+        Voorstraat 2<br />
+        4054 MX Echteld</p>
+
+      <p id="hotel_address">Hotel address:<br />
+        <a href="http://www.hotelvanbalveren.nl/">Hotel en Restaurant van Balveren</a><br />
+        Voorstraat 8<br />
+        4054 MX Echteld</p>
+
+      <p id="hotel_info">The hotel is just in front of the venue, an easy minute's walk.</p>
+    </div>
     <div class="page" id="programme">
       <h2 class="page-title" id="title_programme">Programme</h2>
 
