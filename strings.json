@@ -84,7 +84,8 @@
     "err_2": "Please select whether you will be coming or not.",
     "err_3": "Please select whether you received a day or an evening invitation.",
     "err_4": "Please select meal choices for Guest 1.",
-    "err_5": "Please enter how many guests will be coming."
+    "err_5": "Please enter how many guests will be coming.";
+    "account_name": "Account name"
   },
   "nl": {
     "page_title": "Dave en Lara gaan trouwen",
@@ -171,6 +172,7 @@
     "err_2": "Geef alsjeblieft aan of je komt of niet.",
     "err_3": "Geef alsjeblieft aan of je een uitnodiging hebt ontvangen voor de dag of avond.",
     "err_4": "Selecteer alsjeblieft de maaltijd keuzes voor Gast 1.",
-    "err_5": "Geef alsjeblieft aan met hoeveel jullie komen."
+    "err_5": "Geef alsjeblieft aan met hoeveel jullie komen.",
+    "account_name": "Ten name van"
   }  
 }
