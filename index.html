@@ -41,6 +41,7 @@
     font-size: 60px;
     margin: 0;
   }
+
   @media (min-width: 640px) and (max-width: 1024px) {
     .header {
       padding: 45px 60px;
@@ -301,9 +302,30 @@
   }
   .lang {
     display: inline-block;
+    background-size: cover;
     z-index: 10;
-    margin: 7px 10px;
+    margin: 11px 10px;
     cursor: pointer;
+  }
+  .flag-nl {
+    width: 19px;
+    height: 14px;
+    background-image: url('nl-2.png');
+  }
+  .flag-gb {
+    width: 20px;
+    height: 15px;
+    background-image: url('gb-2.png');
+  }
+  @media (min-width: 640px) {
+    .flag-nl {
+      width: 24px;
+      height: 18px;
+    }
+    .flag-gb {
+      width: 26px;
+      height: 19px;
+    }
   }
   </style>
   <script>
@@ -479,13 +501,13 @@
 <body>
   <div id="background_overlay" class="background-overlay">
     <div class="mobile-menu">
-      <div class="lang" id="m_nl">🇳🇱</div>
-      <div class="lang" id="m_en">🇬🇧</div>
+      <div class="lang flag-nl" id="m_nl"></div>
+      <div class="lang flag-gb" id="m_en"></div>
       <div class="menu-open" id="menu_open">Menu</div>
     </div>
     <div class="lang-desktop">
-      <div class="lang" id="d_nl">🇳🇱</div>
-      <div class="lang" id="d_en">🇬🇧</div>
+      <div class="lang flag-nl" id="d_nl"></div>
+      <div class="lang flag-gb" id="d_en"></div>
     </div>
     <header class="header">
       <h2 id="title_1">Dave and Lara are getting married</h2>
