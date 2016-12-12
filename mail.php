@@ -11,7 +11,7 @@ if (isset($_REQUEST['name_1']))  {
   $main_2 = $_REQUEST['main_2'];
 
   $message = "From: $name_1\n\nStatus: $status\n\n";
-  $message .= "Status: $type\n";
+  $message .= "Type of guest: $type\n";
   $message .= "Number of evening guests: $number_of_evening_guests\n";
   $message .= "Starter_1: $starter_1\nMain_1: $main_1\n\n";
   $message .= "Starter_2: $starter_2\nMain_2: $main_2\n\n";
