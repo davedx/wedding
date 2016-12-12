@@ -91,7 +91,11 @@
     "err_5": "Please enter how many guests will be coming.",
     "account_name": "Account name",
     "title_evening_guests": "Number of guests",
-    "lbl_NumberEveningGuests": "Guests"
+    "lbl_NumberEveningGuests": "Guests",
+    "title_important_info": "Important information",
+    "venue_address": "Venue address:<br /><a href=\"http://www.kasteelwijenburg.nl/\">Kasteel Wijenburg</a><br />Voorstraat 2<br />4054 MX Echteld",
+    "hotel_address": "Hotel address:<br /><a href=\"http://www.hotelvanbalveren.nl/\">Hotel en Restaurant van Balveren</a><br />Voorstraat 8<br />4054 MX Echteld",
+    "hotel_info": "The hotel is just in front of the venue, an easy minute's walk."
   },
   "nl": {
     "page_title": "Dave en Lara gaan trouwen",
@@ -185,6 +189,10 @@
     "err_5": "Geef alsjeblieft aan met hoeveel jullie komen.",
     "account_name": "Ten name van",
     "title_evening_guests": "Aantal gasten",
-    "lbl_NumberEveningGuests": "Gasten"
+    "lbl_NumberEveningGuests": "Gasten",
+    "title_important_info": "Important information",
+    "venue_address": "Venue address:<br /><a href=\"http://www.kasteelwijenburg.nl/\">Kasteel Wijenburg</a><br />Voorstraat 2<br />4054 MX Echteld",
+    "hotel_address": "Hotel address:<br /><a href=\"http://www.hotelvanbalveren.nl/\">Hotel en Restaurant van Balveren</a><br />Voorstraat 8<br />4054 MX Echteld",
+    "hotel_info": "The hotel is just in front of the venue, an easy minute's walk."
   }  
 }
