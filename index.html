@@ -310,7 +310,8 @@
 
   window.onload = function () {
     if (window.location.href.indexOf('#rsvp_thanks') !== -1) {
-      alert('Thank you for sending your RSVP!');
+      var text = strings[current_lang]['alert_rsvp'];
+      alert(text);
     }
 
     var strings = {};
