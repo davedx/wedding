@@ -263,6 +263,13 @@
   .gertjan-circle {
     background-image: url('gertjan.png');
   }
+  #gertjan_phone {
+    background-image: url('phone.png');
+    width: 20px;
+    height: 20px;
+    background-size: cover;
+    cursor: pointer;
+  }
   .engagment-circle {
     width: 200px;
     height: 200px;
@@ -385,6 +392,7 @@
     var invite_options = elem('invite_options');
     var number_guests_options = elem('number_guests_options');
     var number_of_evening_guests = elem('number_of_evening_guests');
+    var gertjan_phone = elem('gertjan_phone');
     var pages = document.getElementsByClassName('page');
     var nav_items = document.getElementsByClassName('nav-item');
     function hidePages() {
@@ -425,6 +433,10 @@
     };
     d_en.onclick = function () {
       setStrings('en');
+    };
+
+    gertjan_phone.onclick = function () {
+      alert('+31 6 46156986');
     };
 
     function setFormError(key) {
@@ -543,7 +555,10 @@
       <p id="hotel_info">The hotel is just in front of the venue, an easy minute's walk.</p>
       
       <h4 class="page-title" id="title_moc">Master of Ceremonies</h4>
-      <div class="circle-block"><span class="us-circle gertjan-circle"></span>Gertjan Verweij
+      <div class="circle-block">
+        <span class="us-circle gertjan-circle"></span>Gertjan Verweij<br>
+        <div id="gertjan_phone"></div>
+      </div>
     </div>
     <div class="page" id="programme">
       <h2 class="page-title" id="title_programme">Programme</h2>
